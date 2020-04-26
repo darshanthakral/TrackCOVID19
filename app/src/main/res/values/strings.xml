@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TrackCOVID19</string>
+    <string name="Reload">Reload</string>
+    <string name="Forward">Forward</string>
+    <string name="Credits">Developed by Darshan Thakral</string>
+
+</resources>
