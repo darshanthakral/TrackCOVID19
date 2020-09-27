@@ -2,6 +2,8 @@ package com.example.trackcovid19;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,27 +17,29 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-WebView Covidtrack;
-String url;
-private ProgressBar viewPB;
+    WebView Covidtrack;
+    String url;
+    private ProgressBar viewPB;
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
+    @SuppressLint("SetJavaScriptEnabled")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         viewPB = findViewById(R.id.showProgress);
-        url="https://www.bing.com/covid";
+        url = "https://www.bing.com/covid";
         Covidtrack = findViewById(R.id.viewCovid);
         Covidtrack.getSettings().setJavaScriptEnabled(true);
         Covidtrack.loadUrl(url);
-        Covidtrack.setWebViewClient(new WebViewClient(){
+        Covidtrack.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 viewPB.setVisibility(View.VISIBLE);
                 setTitle("Loading...");
             }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
@@ -43,7 +47,7 @@ protected void onCreate(Bundle savedInstanceState) {
                 setTitle("TrackCOVID-19");
             }
         });
-        Covidtrack.setWebChromeClient(new WebChromeClient(){
+        Covidtrack.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
@@ -55,9 +59,9 @@ protected void onCreate(Bundle savedInstanceState) {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        if(Covidtrack.canGoBack()){
+        if (Covidtrack.canGoBack()) {
             Covidtrack.goBack();
-        }else{
+        } else {
             finish();
         }
     }
@@ -65,31 +69,31 @@ protected void onCreate(Bundle savedInstanceState) {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.web_menu,menu);
+        menuInflater.inflate(R.menu.web_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    switch (item.getItemId()){
+        switch (item.getItemId()) {
 
-        case R.id.Forward:
-            onForward();
-            break;
+            case R.id.Forward:
+                onForward();
+                break;
 
-        case R.id.Reload:
-            Covidtrack.reload();
+            case R.id.Reload:
+                Covidtrack.reload();
 
-    }
+        }
         return super.onOptionsItemSelected(item);
     }
-    private void onForward()
-    {
-        if(Covidtrack.canGoForward()){
+
+    private void onForward() {
+        if (Covidtrack.canGoForward()) {
             Covidtrack.goForward();
-            }else{
-            Toast.makeText(this,"Cant go Forward!",Toast.LENGTH_LONG).show();
-            }
+        } else {
+            Toast.makeText(this, "Cant go Forward!", Toast.LENGTH_LONG).show();
+        }
     }
 }
 
