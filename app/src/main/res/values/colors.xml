@@ -3,4 +3,7 @@
     <color name="colorPrimary">#51E1ED</color>
     <color name="colorPrimaryDark">#46B2E0</color>
     <color name="colorAccent">#50DBB4</color>
+
+
+    <color name="app_background">#000000</color>
 </resources>
